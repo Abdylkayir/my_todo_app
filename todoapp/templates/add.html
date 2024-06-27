@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My To-Do List</title>
+    <title>Add a New Task</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,59 +20,54 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 800px;
-            height: 500px;
+            width: 300px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
         h1 {
             margin-bottom: 20px;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
-            flex-grow: 1;
-            overflow-y: auto;
-            margin: 0;
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        li {
+        input[type="text"],
+        textarea,
+        select,
+        input[type="date"] {
             padding: 10px;
-            border-bottom: 1px solid #ccc;
+            font-size: 16px;
+            margin-bottom: 10px;
+            width: calc(100% - 22px);
         }
-        li:last-child {
-            border-bottom: none;
-        }
-        a {
-            display: inline-block;
+        button {
             padding: 10px 20px;
             font-size: 16px;
             background-color: #007BFF;
             color: #fff;
-            text-decoration: none;
+            border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-top: 20px;
         }
-        a:hover {
+        button:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>My To-Do List</h1>
-        <ul id="todo-list">
-            {% for todo in todos %}
-                <li>
-                    <strong>Description:</strong> {{ todo.description }}<br>
-                    <strong>Status:</strong> {{ todo.get_status_display }}<br>
-                    <strong>Due Date:</strong> {{ todo.due_date|default:"None" }}
-                </li>
-            {% endfor %}
-        </ul>
-        <a href="{% url 'add_task' %}">Add a new TO-DO</a>
+        <h1>Add a New Task</h1>
+        <form method="post" action="{% url 'add_task' %}">
+            {% csrf_token %}
+            <textarea name="description" placeholder="Enter the task description" required></textarea>
+            <select name="status" required>
+                <option value="new">Новая</option>
+                <option value="in_progress">В процессе</option>
+                <option value="done">Сделано</option>
+            </select>
+            <input type="text" name="due_date" placeholder="YYYY-mm-dd">
+            <button type="submit">Add Task</button>
+        </form>
     </div>
 </body>
 </html>

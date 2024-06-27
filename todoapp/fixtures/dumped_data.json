@@ -1,0 +1,29 @@
+[
+{
+  "model": "todoapp.task",
+  "pk": 1,
+  "fields": {
+    "description": "Krasavchik",
+    "status": "new",
+    "due_date": "2024-06-30"
+  }
+},
+{
+  "model": "todoapp.task",
+  "pk": 2,
+  "fields": {
+    "description": "cdfcdscds",
+    "status": "in_progress",
+    "due_date": "2024-07-30"
+  }
+},
+{
+  "model": "todoapp.task",
+  "pk": 3,
+  "fields": {
+    "description": "cdcsdcsdcds",
+    "status": "done",
+    "due_date": "2024-07-20"
+  }
+}
+]
